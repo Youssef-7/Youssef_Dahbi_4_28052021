@@ -211,44 +211,57 @@
         function validateEndPoint() {
             return 0 !== fingerData[0].end.x
         }
+
         function hasTap() {
             return !!options.tap
         }
+
         function hasDoubleTap() {
             return !!options.doubleTap
         }
+
         function hasLongTap() {
             return !!options.longTap
         }
+
         function validateDoubleTap() {
             if (null == doubleTapStartTime) return !1;
             var now = getTimeStamp();
             return hasDoubleTap() && now - doubleTapStartTime <= options.doubleTapThreshold
         }
+
         function inDoubleTap() {
             return validateDoubleTap()
         }
+
         function validateTap() {
             return (1 === fingerCount || !SUPPORTS_TOUCH) && (isNaN(distance) || distance < options.threshold)
         }
+
         function validateLongTap() {
             return duration > options.longTapThreshold && distance < DOUBLE_TAP_THRESHOLD
         }
+
         function didTap() {
             return !(!validateTap() || !hasTap())
         }
+
         function didDoubleTap() {
             return !(!validateDoubleTap() || !hasDoubleTap())
         }
+
         function didLongTap() {
             return !(!validateLongTap() || !hasLongTap())
         }
+
         function startMultiFingerRelease(event) {
             previousTouchEndTime = getTimeStamp(), fingerCountAtRelease = event.touches.length + 1
         }
+
         function cancelMultiFingerRelease() {
             previousTouchEndTime = 0, fingerCountAtRelease = 0
         }
+
         function inMultiFingerRelease() {
             var withinThreshold = !1;
             if (previousTouchEndTime) {
@@ -257,12 +270,15 @@
             }
             return withinThreshold
         }
+
         function getTouchInProgress() {
             return !($element.data(PLUGIN_NS + "_intouch") !== !0)
         }
+
         function setTouchInProgress(val) {
             $element && (val === !0 ? ($element.bind(MOVE_EV, touchMove), $element.bind(END_EV, touchEnd), LEAVE_EV && $element.bind(LEAVE_EV, touchLeave)) : ($element.unbind(MOVE_EV, touchMove, !1), $element.unbind(END_EV, touchEnd, !1), LEAVE_EV && $element.unbind(LEAVE_EV, touchLeave, !1)), $element.data(PLUGIN_NS + "_intouch", val === !0))
         }
+
         function createFingerData(id, evt) {
             var f = {
                 start: {
@@ -280,48 +296,60 @@
             };
             return f.start.x = f.last.x = f.end.x = evt.pageX || evt.clientX, f.start.y = f.last.y = f.end.y = evt.pageY || evt.clientY, fingerData[id] = f, f
         }
+
         function updateFingerData(evt) {
             var id = void 0 !== evt.identifier ? evt.identifier : 0,
                 f = getFingerData(id);
             return null === f && (f = createFingerData(id, evt)), f.last.x = f.end.x, f.last.y = f.end.y, f.end.x = evt.pageX || evt.clientX, f.end.y = evt.pageY || evt.clientY, f
         }
+
         function getFingerData(id) {
             return fingerData[id] || null
         }
+
         function setMaxDistance(direction, distance) {
             direction != NONE && (distance = Math.max(distance, getMaxDistance(direction)), maximumsMap[direction].distance = distance)
         }
+
         function getMaxDistance(direction) {
             if (maximumsMap[direction]) return maximumsMap[direction].distance
         }
+
         function createMaximumsData() {
             var maxData = {};
             return maxData[LEFT] = createMaximumVO(LEFT), maxData[RIGHT] = createMaximumVO(RIGHT), maxData[UP] = createMaximumVO(UP), maxData[DOWN] = createMaximumVO(DOWN), maxData
         }
+
         function createMaximumVO(dir) {
             return {
                 direction: dir,
                 distance: 0
             }
         }
+
         function calculateDuration() {
             return endTime - startTime
         }
+
         function calculateTouchesDistance(startPoint, endPoint) {
             var diffX = Math.abs(startPoint.x - endPoint.x),
                 diffY = Math.abs(startPoint.y - endPoint.y);
             return Math.round(Math.sqrt(diffX * diffX + diffY * diffY))
         }
+
         function calculatePinchZoom(startDistance, endDistance) {
             var percent = endDistance / startDistance * 1;
             return percent.toFixed(2)
         }
+
         function calculatePinchDirection() {
             return pinchZoom < 1 ? OUT : IN
         }
+
         function calculateDistance(startPoint, endPoint) {
             return Math.round(Math.sqrt(Math.pow(endPoint.x - startPoint.x, 2) + Math.pow(endPoint.y - startPoint.y, 2)))
         }
+
         function calculateAngle(startPoint, endPoint) {
             var x = startPoint.x - endPoint.x,
                 y = endPoint.y - startPoint.y,
@@ -329,15 +357,18 @@
                 angle = Math.round(180 * r / Math.PI);
             return angle < 0 && (angle = 360 - Math.abs(angle)), angle
         }
+
         function calculateDirection(startPoint, endPoint) {
             if (comparePoints(startPoint, endPoint)) return NONE;
             var angle = calculateAngle(startPoint, endPoint);
             return angle <= 45 && angle >= 0 ? LEFT : angle <= 360 && angle >= 315 ? LEFT : angle >= 135 && angle <= 225 ? RIGHT : angle > 45 && angle < 135 ? DOWN : UP
         }
+
         function getTimeStamp() {
             var now = new Date;
             return now.getTime()
         }
+
         function getbounds(el) {
             el = $(el);
             var offset = el.offset(),
@@ -349,9 +380,11 @@
                 };
             return bounds
         }
+
         function isInBounds(point, bounds) {
             return point.x > bounds.left && point.x < bounds.right && point.y > bounds.top && point.y < bounds.bottom
         }
+
         function comparePoints(pointA, pointB) {
             return pointA.x == pointB.x && pointA.y == pointB.y
         }

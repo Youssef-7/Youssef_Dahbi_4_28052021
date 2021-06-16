@@ -665,8 +665,9 @@ h4 {
 }
 .tc-white {
     color: #FFFFFF!important;
+    font-weight: bold;
 }
-
+.mg-md-contact{font-size: 22px;}
 .btn-atomic-tangerine {
     background: #F3976C;
     color: #FFFFFF!important;
@@ -677,6 +678,10 @@ h4 {
 }
 .ltc-white {
     color: #FFFFFF!important;
+}
+.contact-ltc{ 
+    text-align: center;
+    font-size: 18px; 
 }
 .ltc-white:hover {
     color: #cccccc!important;
@@ -703,7 +708,7 @@ h4 {
 .bg-presentation {
     background-image: url("img/image-de-presentation.jpg");
 }
-@media (max-width: 1024px) {
+@media (max-width: 1025px) {
     .bloc {
         padding-left: 20px;
         padding-right: 20px;
@@ -714,6 +719,52 @@ h4 {
     .bloc-tile-4.full-width-bloc .container {
         padding-left: 0;
         padding-right: 0;
+    }
+}
+@media all and (max-width: 767px) {
+    .bloc {
+        margin:auto;
+        max-width: 767px;
+    }
+    .bloc.full-width-bloc,
+    .bloc-tile-2.full-width-bloc .container,
+    .bloc-tile-3.full-width-bloc .container,
+    .bloc-tile-4.full-width-bloc .container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .row.tight-width-whitespace{max-width: 320px;}
+    .col-sm-12{ 
+        max-width: 320px; 
+        text-align: center; 
+        margin:auto;
+    }
+    .mg-md.text-center.tc-white{ 
+        max-width: 265px; 
+        margin:auto;
+    }
+    .text-center.white{
+        max-width: 265px;
+        margin: auto;
+    }
+    .mg-md-contact{ 
+        max-width:320px; 
+        margin:auto;
+    }
+    .contact-ltc{ 
+        max-width: 265px;
+    }
+    .col-sm-6{ 
+        max-width: 320px; 
+        margin:auto;
+    }
+    .text-center.mg-lg{ 
+        max-width: 290px;
+        margin:auto;
+    }
+    a { 
+        width: 270px;
+        margin:auto;
     }
 }
 @media (max-width: 992px) and (min-width: 768px) {
