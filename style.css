@@ -676,6 +676,9 @@ h4 {
     background: #c27956!important;
     color: #FFFFFF!important;
 }
+.titre_white {
+    font-weight: bold;
+}
 .ltc-white {
     color: #FFFFFF!important;
 }
